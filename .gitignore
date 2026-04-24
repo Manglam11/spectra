@@ -16,11 +16,14 @@ __pycache__/
 *.pyo
 
 # Data (uploads are local only)
-data/uploads/
-data/processed/
+data/uploads/*
+!data/uploads/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
 
 # Outputs
-outputs/
+outputs/*
+!outputs/.gitkeep
 
 # OS
 .DS_Store
