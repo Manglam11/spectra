@@ -1,6 +1,8 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+
 sns.set_theme(style="darkgrid", palette="muted")
 
 
@@ -19,7 +21,7 @@ class VisualizationEngine:
         """
         self.df = df.copy()
 
-    def plot_histogram(self, column:str) -> None:
+    def plot_histogram(self, column:str) -> Figure:
         """
         Plots the histogram of numeric type of column using seaborn library.
 
@@ -37,10 +39,9 @@ class VisualizationEngine:
         ax.set_ylabel("Frequency")
 
         plt.tight_layout()
-        plt.show()
+        return fig
 
-
-    def plot_bar(self, column:str) -> None:
+    def plot_bar(self, column:str) -> Figure:
         """
         Plots the bar chart of categorical type of column using seaborn library.
 
@@ -58,9 +59,8 @@ class VisualizationEngine:
         ax.set_ylabel("Count")
 
         plt.tight_layout()
-        plt.show()
-
-    def plot_scatter(self, col_x: str, col_y:str) -> None:
+        return fig
+    def plot_scatter(self, col_x: str, col_y:str) -> Figure:
         """
         Plots the scatter plot of two numeric type of column using seaborn library.
 
@@ -80,9 +80,8 @@ class VisualizationEngine:
         ax.set_ylabel(col_y)
 
         plt.tight_layout()
-        plt.show()
-
-    def plot_violin(self, cat_col: str, num_col:str) -> None:
+        return fig
+    def plot_violin(self, cat_col: str, num_col:str) -> Figure:
         """
         Plots the violin plot between category and numeric column using seaborn library.
 
@@ -102,9 +101,8 @@ class VisualizationEngine:
         ax.set_ylabel(num_col)
 
         plt.tight_layout()
-        plt.show()
-
-    def plot_correlation_heatmap(self) -> None:
+        return fig
+    def plot_correlation_heatmap(self) -> Figure:
         """
         Plots the correlation heatmap using seaborn library.
 
@@ -118,6 +116,5 @@ class VisualizationEngine:
         )
         ax.set_title("Correlation Heatmap")
         plt.tight_layout()
-        plt.show()
-
+        return fig
 
