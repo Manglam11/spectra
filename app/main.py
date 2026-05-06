@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import streamlit as st
 from components.uploader import render_uploader
 from components.eda_display import render_eda
+from components.viz_display import render_visuals
 
 st.set_page_config(
     page_title="Spectra | EDA Platform",
@@ -151,3 +152,8 @@ if df is not None:
     st.session_state["df"] = df
     st.divider()
     render_eda(df)
+
+# ── Visualisation stage ────────────────────────────────────────────────────────
+if df is not None:
+    st.divider()
+    render_visuals(df)
