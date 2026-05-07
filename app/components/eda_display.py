@@ -4,7 +4,7 @@ import pandas as pd
 from src.eda_engine import EDAEngine
 
 
-def render_eda(df: pd.DataFrame) -> None:
+def render_eda(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Renders the EDA summary UI for the uploaded DataFrame.
     Displays numeric and categorical statistical summaries.
@@ -42,3 +42,5 @@ def render_eda(df: pd.DataFrame) -> None:
                 categorical_summary,
                 use_container_width=True
             )
+
+    return numeric_summary, categorical_summary
