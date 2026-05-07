@@ -31,7 +31,8 @@ class MySQLManager:
                 port=self.port,
                 user=self.user,
                 password=self.password,
-                database=self.database
+                database=self.database,
+                ssl_ca = os.getenv("MYSQL_SSL_CA")
             )
             print("Connection Established")
         except mysql.connector.Error as e:
