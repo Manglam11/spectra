@@ -6,6 +6,7 @@ import streamlit as st
 from components.uploader import render_uploader
 from components.eda_display import render_eda
 from components.viz_display import render_visuals
+from components.chat_ui import render_chat
 
 st.set_page_config(
     page_title="Spectra | EDA Platform",
@@ -147,13 +148,17 @@ st.divider()
 # ── Upload stage ───────────────────────────────────────────────────────────────
 df = render_uploader()
 
-# ── EDA stage ─────────────────────────────────────────────────────────────────
 if df is not None:
+# ── EDA stage ─────────────────────────────────────────────────────────────────
     st.session_state["df"] = df
     st.divider()
-    render_eda(df)
+    numeric_summary, categorical_summary = render_eda(df)
 
 # ── Visualisation stage ────────────────────────────────────────────────────────
-if df is not None:
     st.divider()
     render_visuals(df)
+
+# ── Chat stage ────────────────────────────────────────────────────────
+    st.divider()
+    render_chat(numeric_summary, categorical_summary)
+
