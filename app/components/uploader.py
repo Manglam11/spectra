@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from src.data_loader import DataLoader
+from src.db_manager import MySQLManager
 
 
 def render_uploader() -> pd.DataFrame | None:
@@ -35,6 +36,17 @@ def render_uploader() -> pd.DataFrame | None:
         return None
 
     st.success(f"✅ **{uploaded_file.name}** loaded — {df.shape[0]:,} rows × {df.shape[1]} columns")
+
+    # Uploading info about file in database
+    db = MySQLManager()
+    db.connect()
+    db.log_upload(
+        dataset_name=uploaded_file.name,
+        row_count=df.shape[0],
+        col_count=df.shape[1],
+        session_id=str(st.session_state.get("session_id", "unknown"))
+    )
+    db.disconnect()
 
     # ── Basic profile ──────────────────────────────────────────────────────────
     with st.expander("🔍 Basic Profile", expanded=True):
