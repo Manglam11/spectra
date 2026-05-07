@@ -42,5 +42,12 @@ def render_eda(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
                 categorical_summary,
                 use_container_width=True
             )
+    combined = pd.concat([numeric_summary, categorical_summary])
+    st.download_button(
+        label="⬇️ Download EDA Summary",
+        data=combined.to_csv().encode("utf-8"),
+        file_name="eda_summary.csv",
+        mime="text/csv"
+    )
 
     return numeric_summary, categorical_summary
