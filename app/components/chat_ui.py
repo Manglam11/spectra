@@ -15,6 +15,12 @@ def render_chat(numeric_summary: pd.DataFrame, categorical_summary: pd.DataFrame
     if "chat_engine" not in st.session_state:
         st.session_state["chat_engine"] = ChatEngine(numeric_summary, categorical_summary)
 
+    for message in st.session_state["chat_engine"].messages:
+        if message["role"] == "system":
+            continue
+        with st.chat_message(message["role"]):
+            st.write(message["content"])
+
     user_input = st.chat_input("Ask anything about your dataset...")
 
     if user_input:
