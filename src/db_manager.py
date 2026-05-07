@@ -26,13 +26,24 @@ class MySQLManager:
         else catch any exception and print the error.
         """
         try:
+            ssl_ca = os.getenv("MYSQL_SSL_CA")
+
+            # On Streamlit Cloud, cert content is stored as a secret
+            cert_content = os.getenv("MYSQL_SSL_CERT_CONTENT")
+            if cert_content:
+                import tempfile
+                tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".pem")
+                tmp.write(cert_content.encode())
+                tmp.close()
+                ssl_ca = tmp.name
+
             self.connection = mysql.connector.connect(
                 host=self.host,
                 port=self.port,
                 user=self.user,
                 password=self.password,
                 database=self.database,
-                ssl_ca = os.getenv("MYSQL_SSL_CA")
+                ssl_ca=ssl_ca
             )
             print("Connection Established")
         except mysql.connector.Error as e:
