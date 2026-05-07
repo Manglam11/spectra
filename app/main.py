@@ -1,5 +1,6 @@
 import sys
 import os
+import uuid
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import streamlit as st
@@ -14,6 +15,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+# Session ID generation
+if "session_id" not in st.session_state:
+    st.session_state["session_id"] = str(uuid.uuid4())
 
 # ── Global styles ─────────────────────────────────────────────────────────────
 st.markdown("""
