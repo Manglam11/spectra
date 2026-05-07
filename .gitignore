@@ -24,6 +24,7 @@ data/processed/*
 # Outputs
 outputs/*
 !outputs/.gitkeep
+!outputs/demo.gif
 
 # OS
 .DS_Store
