@@ -1,3 +1,5 @@
+USE defaultdb;
+
 CREATE TABLE uploads_info (
     upload_id      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     dataset_name   VARCHAR(100),
